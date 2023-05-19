@@ -275,6 +275,9 @@ function Navbar() {
 
           <Group className={classes.hiddenMobile}>
             <SwitchToggle />
+            <Link to="/profile">
+              <Button>Profile</Button>
+            </Link>
             <Link to="/login">
               <Button variant="default">Log in</Button>
             </Link>

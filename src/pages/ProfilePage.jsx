@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AuthContext } from "../src/context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 
 const ProfilePage = () => {
   const { logout } = useContext(AuthContext);

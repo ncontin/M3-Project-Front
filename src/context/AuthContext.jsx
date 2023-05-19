@@ -43,6 +43,7 @@ function AuthProviderWrapper({ children }) {
   const logout = () => {
     setToken();
     localStorage.removeItem("authToken");
+    console.log("user logged out");
     setIsLoggedIn(false);
   };
 

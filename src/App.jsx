@@ -1,12 +1,12 @@
 import "./App.css";
 import { useState } from "react";
 import Navbar from "./components/Navbar";
-import SignupPage from "../pages/SignupPage";
-import LoginPage from "../pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
+import LoginPage from "./pages/LoginPage";
 import { Route, Routes } from "react-router-dom";
 import { MantineProvider, ColorSchemeProvider } from "@mantine/core";
-import HomePage from "../pages/HomePage";
-import ProfilePage from "../pages/ProfilePage";
+import HomePage from "./pages/HomePage";
+import ProfilePage from "./pages/ProfilePage";
 import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
@@ -32,6 +32,7 @@ function App() {
           <Route
             path="/profile"
             element={
+              // <ProfilePage />
               <PrivateRoute>
                 <ProfilePage />
               </PrivateRoute>
