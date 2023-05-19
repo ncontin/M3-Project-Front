@@ -18,26 +18,30 @@ import { Link, useNavigate } from "react-router-dom";
 function LoginPage() {
   const navigate = useNavigate();
 
-  const { setToken } = useContext(AuthContext);
+  const { setToken, setIsLoggedIn } = useContext(AuthContext);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await fetch("http://localhost:5005/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-    });
-    if (response.status === 200) {
-      const tokenFromResponse = await response.json();
-      setToken(tokenFromResponse);
-
-      navigate("/profile");
-      console.log("logging in");
+    try {
+      const response = await fetch("http://localhost:5005/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+      if (response.status === 200) {
+        const tokenFromResponse = await response.json();
+        setToken(tokenFromResponse.authToken);
+        setIsLoggedIn(true);
+        navigate("/profile");
+        console.log("logging in");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
   return (

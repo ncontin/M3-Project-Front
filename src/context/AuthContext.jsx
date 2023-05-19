@@ -49,7 +49,7 @@ function AuthProviderWrapper({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ token, setToken, isLoggedIn, isLoading, logout }}
+      value={{ token, setToken, isLoggedIn, isLoading, setIsLoggedIn, logout }}
     >
       {children}
     </AuthContext.Provider>
