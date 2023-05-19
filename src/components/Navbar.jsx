@@ -211,7 +211,7 @@ function Navbar() {
             <a href="/" className={classes.link}>
               Home
             </a>
-            <HoverCard
+            {/* <HoverCard
               width={600}
               position="bottom"
               radius="md"
@@ -264,17 +264,20 @@ function Navbar() {
                   </Group>
                 </div>
               </HoverCard.Dropdown>
-            </HoverCard>
+            </HoverCard> */}
             <a href="#" className={classes.link}>
-              Learn
+              CoolSpots
             </a>
-            <a href="#" className={classes.link}>
+            {/* <a href="#" className={classes.link}>
               Academy
-            </a>
+            </a> */}
           </Group>
 
           <Group className={classes.hiddenMobile}>
             <SwitchToggle />
+            <Link to="/">
+              <Button>Create a spot</Button>
+            </Link>
             <Link to="/profile">
               <Button>Profile</Button>
             </Link>
