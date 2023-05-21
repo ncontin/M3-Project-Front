@@ -37,7 +37,7 @@ function LoginPage() {
         const tokenFromResponse = await response.json();
         setToken(tokenFromResponse.authToken);
         setIsLoggedIn(true);
-        navigate("/profile");
+        navigate("/spots");
         console.log("logging in");
       }
     } catch (error) {

@@ -8,6 +8,9 @@ import { MantineProvider, ColorSchemeProvider } from "@mantine/core";
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
 import PrivateRoute from "./components/PrivateRoute";
+import Spots from "./pages/Spots";
+import London from "./pages/London";
+import SpotDetails from "./pages/SpotDetails";
 
 function App() {
   const [colorScheme, setColorScheme] = useState("light");
@@ -29,6 +32,9 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/spots" element={<Spots />} />
+          <Route path="/spots/london" element={<London />} />
+          <Route path="/spots/london/:spotId" element={<SpotDetails />} />
           <Route
             path="/profile"
             element={

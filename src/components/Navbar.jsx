@@ -204,13 +204,14 @@ function Navbar() {
             spacing={0}
             className={classes.hiddenMobile}
           >
-            <a href="/" className={classes.link}>
+            {/* <a href="/" className={classes.link}>
               <IconCurrencyBitcoin width={30} />
-            </a>
+            </a> */}
 
-            <a href="/" className={classes.link}>
-              Home
-            </a>
+            <Link to="/" className={classes.link}>
+              <IconCurrencyBitcoin width={30} /> Home
+            </Link>
+
             {/* <HoverCard
               width={600}
               position="bottom"
@@ -265,9 +266,9 @@ function Navbar() {
                 </div>
               </HoverCard.Dropdown>
             </HoverCard> */}
-            <a href="#" className={classes.link}>
+            <Link to="/spots" className={classes.link}>
               CoolSpots
-            </a>
+            </Link>
             {/* <a href="#" className={classes.link}>
               Academy
             </a> */}
