@@ -1,7 +1,7 @@
 import React from "react";
-import London from "../components/Loncomp";
-import Barcelona from "../components/Barcelona";
-import Rome from "../components/Rome";
+import London from "../components/LondonComp";
+import Barcelona from "../components/BarcelonaComp";
+import Rome from "../components/RomeComp";
 import {
   Container,
   Grid,

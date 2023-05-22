@@ -9,7 +9,8 @@ export function London() {
     try {
       const response = await axios.get("http://localhost:5005/api/spots");
       if (response.status === 200) {
-        setSpots(response.data);
+        const londonSpots = response.data.filter((spot) => spot.city === "London");
+        setSpots(londonSpots);
       }
     } catch (error) {
       console.log(error);
