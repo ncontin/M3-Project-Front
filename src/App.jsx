@@ -33,7 +33,7 @@ function App() {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/spots" element={<Spots />} />
-          <Route path="/spots/london" element={<London />} />
+          <Route path="/spots/london" element={<London title={"London"} />} />
           <Route path="/spots/london/:spotId" element={<SpotDetails />} />
           <Route
             path="/profile"
