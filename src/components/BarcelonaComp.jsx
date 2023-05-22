@@ -1,4 +1,5 @@
 import { createStyles, Paper, Text, Title, Button, rem } from "@mantine/core";
+import { Link } from "react-router-dom";
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -29,31 +30,33 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export function Barcelona() {
+export function BarcelonaComp() {
   const { classes } = useStyles();
 
   return (
-    <Paper
-      shadow="md"
-      p="xl"
-      radius="md"
-      sx={{
-        backgroundImage: `url(https://upload.wikimedia.org/wikipedia/commons/2/26/%CE%A3%CE%B1%CE%B3%CF%81%CE%AC%CE%B4%CE%B1_%CE%A6%CE%B1%CE%BC%CE%AF%CE%BB%CE%B9%CE%B1_2941.jpg)`,
-      }}
-      className={classes.card}
-    >
-      <div>
-        <Text className={classes.category} size="xs">
-          Nature
-        </Text>
-        <Title order={3} className={classes.title}>
-          Barcelona
-        </Title>
-      </div>
-      {/* <Button variant="white" color="dark">
+    <Link to="/spots/barcelona">
+      <Paper
+        shadow="md"
+        p="xl"
+        radius="md"
+        sx={{
+          backgroundImage: `url(https://upload.wikimedia.org/wikipedia/commons/2/26/%CE%A3%CE%B1%CE%B3%CF%81%CE%AC%CE%B4%CE%B1_%CE%A6%CE%B1%CE%BC%CE%AF%CE%BB%CE%B9%CE%B1_2941.jpg)`,
+        }}
+        className={classes.card}
+      >
+        <div>
+          <Text className={classes.category} size="xs">
+            Nature
+          </Text>
+          <Title order={3} className={classes.title}>
+            Barcelona
+          </Title>
+        </div>
+        {/* <Button variant="white" color="dark">
         Read article
       </Button> */}
-    </Paper>
+      </Paper>
+    </Link>
   );
 }
-export default Barcelona;
+export default BarcelonaComp;

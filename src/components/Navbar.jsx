@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-// import { useContext } from "react"; // <== IMPORT
-// import { AuthContext } from "../context/auth.context"; // <== IMPORT
+import { useContext } from "react"; // <== IMPORT
+import { AuthContext } from "../context/AuthContext"; // <== IMPORT
 import {
   createStyles,
   Header,
@@ -130,7 +130,7 @@ const mockdata = [
 function Navbar() {
   // Subscribe to the AuthContext to gain access to
   // the values from AuthContext.Provider `value` prop
-  // const { isLoggedIn, user } = useContext(AuthContext);
+  const { isLoggedIn, logout } = useContext(AuthContext);
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
   const { classes, theme } = useStyles();
@@ -263,16 +263,39 @@ function Navbar() {
             <Link to="/spots/create">
               <Button>Create a spot</Button>
             </Link>
-            <Link to="/profile">
+            {/* <Link to="/profile">
               <Button>Profile</Button>
             </Link>
             <Link to="/login">
               <Button variant="default">Log in</Button>
-            </Link>
+            </Link> */}
 
-            <Link to="/signup">
+            {isLoggedIn && (
+              <Link to="/profile">
+                <Button>Profile</Button>
+              </Link>
+            )}
+            {!isLoggedIn && (
+              <Link to="/login">
+                <Button variant="default">Log in</Button>
+              </Link>
+            )}
+            {!isLoggedIn && (
+              <Link to="/signup">
+                <Button>Sign up</Button>
+              </Link>
+            )}
+            {isLoggedIn && (
+              <Link to="/login">
+                <Button type="button" onClick={logout}>
+                  Log Out
+                </Button>
+              </Link>
+            )}
+
+            {/* <Link to="/signup">
               <Button>Sign up</Button>
-            </Link>
+            </Link> */}
           </Group>
 
           <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop} />

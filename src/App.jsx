@@ -12,6 +12,9 @@ import Spots from "./pages/Spots";
 import London from "./pages/London";
 import SpotDetails from "./pages/SpotDetails";
 import CreateSpot from "./pages/CreateSpot";
+import Rome from "./pages/Rome";
+import Barcelona from "./pages/Barcelona";
+import UpdatePage from "./pages/UpdatePage";
 
 function App() {
   const [colorScheme, setColorScheme] = useState("light");
@@ -29,6 +32,11 @@ function App() {
           <Route path="/spots/london" element={<London title={"London"} />} />
           <Route path="/spots/london/:spotId" element={<SpotDetails />} />
           <Route path="/spots/create" element={<CreateSpot />} />
+          <Route path="/spots/rome" element={<Rome />} />
+          <Route path="/spots/rome/:spotId" element={<SpotDetails />} />
+          <Route path="/spots/barcelona" element={<Barcelona />} />
+          <Route path="/spots/barcelona/:spotId" element={<SpotDetails />} />
+          <Route path="/spots/update/:spotId" element={<UpdatePage />} />
           <Route
             path="/profile"
             element={

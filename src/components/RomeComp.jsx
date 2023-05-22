@@ -30,11 +30,11 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export function Rome() {
+export function RomeComp() {
   const { classes } = useStyles();
 
   return (
-    <Link to="/spots/Rome">
+    <Link to="/spots/rome">
       <Paper
         shadow="md"
         p="xl"
@@ -59,4 +59,4 @@ export function Rome() {
     </Link>
   );
 }
-export default Rome;
+export default RomeComp;
