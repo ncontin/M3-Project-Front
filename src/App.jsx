@@ -11,22 +11,15 @@ import PrivateRoute from "./components/PrivateRoute";
 import Spots from "./pages/Spots";
 import London from "./pages/London";
 import SpotDetails from "./pages/SpotDetails";
+import CreateSpot from "./pages/CreateSpot";
 
 function App() {
   const [colorScheme, setColorScheme] = useState("light");
-  const toggleColorScheme = (value) =>
-    setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
+  const toggleColorScheme = (value) => setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
 
   return (
-    <ColorSchemeProvider
-      colorScheme={colorScheme}
-      toggleColorScheme={toggleColorScheme}
-    >
-      <MantineProvider
-        theme={{ colorScheme }}
-        withGlobalStyles
-        withNormalizeCSS
-      >
+    <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+      <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
         <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -35,6 +28,7 @@ function App() {
           <Route path="/spots" element={<Spots />} />
           <Route path="/spots/london" element={<London title={"London"} />} />
           <Route path="/spots/london/:spotId" element={<SpotDetails />} />
+          <Route path="/spots/create" element={<CreateSpot />} />
           <Route
             path="/profile"
             element={

@@ -56,10 +56,7 @@ const useStyles = createStyles((theme) => ({
     },
 
     ...theme.fn.hover({
-      backgroundColor:
-        theme.colorScheme === "dark"
-          ? theme.colors.dark[6]
-          : theme.colors.gray[0],
+      backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[6] : theme.colors.gray[0],
     }),
   },
 
@@ -69,27 +66,19 @@ const useStyles = createStyles((theme) => ({
     borderRadius: theme.radius.md,
 
     ...theme.fn.hover({
-      backgroundColor:
-        theme.colorScheme === "dark"
-          ? theme.colors.dark[7]
-          : theme.colors.gray[0],
+      backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.colors.gray[0],
     }),
 
     "&:active": theme.activeStyles,
   },
 
   dropdownFooter: {
-    backgroundColor:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[7]
-        : theme.colors.gray[0],
+    backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.colors.gray[0],
     margin: `calc(${theme.spacing.md} * -1)`,
     marginTop: theme.spacing.sm,
     padding: `${theme.spacing.md} calc(${theme.spacing.md} * 2)`,
     paddingBottom: theme.spacing.xl,
-    borderTop: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[1]
-    }`,
+    borderTop: `${rem(1)} solid ${theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[1]}`,
   },
 
   hiddenMobile: {
@@ -142,8 +131,7 @@ function Navbar() {
   // Subscribe to the AuthContext to gain access to
   // the values from AuthContext.Provider `value` prop
   // const { isLoggedIn, user } = useContext(AuthContext);
-  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
-    useDisclosure(false);
+  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
   const { classes, theme } = useStyles();
 
@@ -199,11 +187,7 @@ function Navbar() {
     <Box>
       <Header height={60} px="md">
         <Group position="apart" sx={{ height: "100%" }}>
-          <Group
-            sx={{ height: "100%" }}
-            spacing={0}
-            className={classes.hiddenMobile}
-          >
+          <Group sx={{ height: "100%" }} spacing={0} className={classes.hiddenMobile}>
             {/* <a href="/" className={classes.link}>
               <IconCurrencyBitcoin width={30} />
             </a> */}
@@ -276,7 +260,7 @@ function Navbar() {
 
           <Group className={classes.hiddenMobile}>
             <SwitchToggle />
-            <Link to="/">
+            <Link to="/spots/create">
               <Button>Create a spot</Button>
             </Link>
             <Link to="/profile">
@@ -291,11 +275,7 @@ function Navbar() {
             </Link>
           </Group>
 
-          <Burger
-            opened={drawerOpened}
-            onClick={toggleDrawer}
-            className={classes.hiddenDesktop}
-          />
+          <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop} />
         </Group>
       </Header>
 
@@ -309,10 +289,7 @@ function Navbar() {
         zIndex={1000000}
       >
         <ScrollArea h={`calc(100vh - ${rem(60)})`} mx="-md">
-          <Divider
-            my="sm"
-            color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
-          />
+          <Divider my="sm" color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"} />
 
           <a href="#" className={classes.link}>
             Home
@@ -333,10 +310,7 @@ function Navbar() {
             Academy
           </a>
 
-          <Divider
-            my="sm"
-            color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
-          />
+          <Divider my="sm" color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"} />
 
           <Group position="center" grow pb="xl" px="md">
             <SwitchToggle />

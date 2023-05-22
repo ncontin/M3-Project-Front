@@ -9,9 +9,7 @@ function SpotDetails() {
 
   const fetchSpot = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:5005/api/spots/${spotId}`
-      );
+      const response = await axios.get(`http://localhost:5005/api/spots/${spotId}`);
       console.log(response.status);
       if (response.status === 200) {
         console.log(response.data);
@@ -28,12 +26,18 @@ function SpotDetails() {
 
   return (
     <>
-      <h2>{spot.title}</h2>
-      <h3>{spot.description}</h3>
-      <h3>{spot.rating}</h3>
-      <h3>{spot.city}</h3>
-      <h3>{spot.adress}</h3>
-      {/* <h2>Hello</h2> */}
+      {spot ? (
+        <>
+          <h2>{spot.title}</h2>
+          <h3>{spot.description}</h3>
+          <h3>{spot.rating}</h3>
+          <h3>{spot.city}</h3>
+          <h3>{spot.address}</h3>
+        </>
+      ) : (
+        <p>Loading...</p>
+      )}
+      <h2>Hello</h2>
     </>
   );
 }
