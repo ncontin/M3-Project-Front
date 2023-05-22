@@ -19,7 +19,7 @@ const CreateSpot = () => {
     };
 
     try {
-      const response = await fetch("/spots", {
+      const response = await fetch("http://localhost:5005/api/spots/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
