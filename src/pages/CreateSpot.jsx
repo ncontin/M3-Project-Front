@@ -8,19 +8,24 @@ const CreateSpot = () => {
   const [rating, setRating] = useState("");
   const [city, setCity] = useState("London");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-    const payload = {
-      title,
-      description,
-      address,
-      rating,
-      city,
-    };
+    const fData = new FormData();
+    const image = event.target.image.files[0];
+    console.log("image", image);
+    fData.append("imageUrl", image);
+    fData.append("title", title);
+    fData.append("description", description);
+    fData.append("address", address);
+    fData.append("rating", rating);
+    fData.append("city", city);
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BASE_API_URL}/api/spots/`, payload);
+      const response = await axios.post(
+        "http://localhost:5005/api/spots/",
+        fData
+      );
 
       if (response.status === 201) {
         const newSpot = response.data;
@@ -39,22 +44,41 @@ const CreateSpot = () => {
   return (
     <div>
       <h2>Create a Spot</h2>
-      <form onSubmit={handleSubmit}>
+      <form encType="multipart/form-data" onSubmit={handleSubmit}>
         <div>
           <label>Title:</label>
-          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
         </div>
         <div>
           <label>Description:</label>
-          <textarea value={description} onChange={(e) => setDescription(e.target.value)} required></textarea>
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          ></textarea>
         </div>
         <div>
           <label>Address:</label>
-          <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} required />
+          <input
+            type="text"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            required
+          />
         </div>
         <div>
           <label>Rating:</label>
-          <input type="number" value={rating} onChange={(e) => setRating(e.target.value)} required />
+          <input
+            type="number"
+            value={rating}
+            onChange={(e) => setRating(e.target.value)}
+            required
+          />
         </div>
         <div>
           <label>City:</label>
@@ -63,6 +87,15 @@ const CreateSpot = () => {
             <option value="Rome">Rome</option>
             <option value="Barcelona">Barcelona</option>
           </select>
+        </div>
+        <div>
+          <label>Image</label>
+          <input
+            type="file"
+            name="image"
+            accept="image/png, image/jpg"
+            required
+          />
         </div>
         <button type="submit">Create Spot</button>
       </form>

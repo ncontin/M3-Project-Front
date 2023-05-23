@@ -16,16 +16,20 @@ import {
   Container,
   Rating,
 } from "@mantine/core";
+import Search from "../components/Search";
 
 const useStyles = createStyles((theme) => ({
   card: {
-    backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
+    backgroundColor:
+      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
     width: rem(350),
-    height: rem(480),
+    height: rem(402),
   },
 
   section: {
-    borderBottom: `${rem(1)} solid ${theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]}`,
+    borderBottom: `${rem(1)} solid ${
+      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
+    }`,
     paddingLeft: theme.spacing.md,
     paddingRight: theme.spacing.md,
     paddingBottom: theme.spacing.md,
@@ -45,10 +49,11 @@ const useStyles = createStyles((theme) => ({
 export function Rome() {
   const { classes, theme } = useStyles();
   const [spots, setSpots] = useState([]);
+  const [searchText, setSearchText] = useState("");
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BASE_API_URL}/api/spots`);
+      const response = await axios.get("http://localhost:5005/api/spots");
       if (response.status === 200) {
         const romeSpots = response.data.filter((spot) => spot.city === "Rome");
         setSpots(romeSpots);
@@ -64,10 +69,11 @@ export function Rome() {
 
   return (
     <>
-      <h2>Rome Spots</h2>
       {spots.length > 0 ? (
         <>
           <Container mt={30} mb={30} size={1920}>
+            <h2>Rome Spots</h2>
+            <Search searchText={searchText} setSearchText={setSearchText} />
             <Flex
               mih={50}
               // bg="rgba(0, 0, 0, .3)"
@@ -77,61 +83,81 @@ export function Rome() {
               direction="row"
               wrap="wrap"
             >
-              {spots.map((spot) => (
-                <div key={spot._id}>
-                  <Card withBorder radius="md" p="md" className={classes.card} width={200}>
-                    <Card.Section>
-                      <Image
-                        src={
-                          "https://images.unsplash.com/photo-1437719417032-8595fd9e9dc6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80"
-                        }
-                        alt={"title"}
-                        height={180}
-                      />
-                    </Card.Section>
+              {spots
+                .filter((spot) => {
+                  if (
+                    spot.title.toLowerCase().includes(searchText.toLowerCase())
+                  ) {
+                    return spot;
+                  }
+                })
+                .map((spot) => (
+                  <div key={spot._id}>
+                    <Card
+                      withBorder
+                      radius="md"
+                      p="md"
+                      className={classes.card}
+                      width={200}
+                    >
+                      <Card.Section>
+                        <Image
+                          src={`${spot.imageUrl}`}
+                          alt={"title"}
+                          height={180}
+                        />
+                      </Card.Section>
 
-                    <Card.Section className={classes.section} mt="md">
-                      <Group position="apart">
-                        <Text fz="lg" fw={500}>
-                          {spot.title}
+                      <Card.Section className={classes.section} mt="md">
+                        <Group position="apart">
+                          <Text fz="lg" fw={500}>
+                            {spot.title}
+                          </Text>
+                          <Badge size="sm">{spot.city}</Badge>
+                        </Group>
+                        <Text fz="sm" mt="xs">
+                          {spot.description}
                         </Text>
-                        <Badge size="sm">{spot.city}</Badge>
-                      </Group>
-                      <Text fz="sm" mt="xs">
-                        {spot.description}
-                      </Text>
-                    </Card.Section>
+                      </Card.Section>
 
-                    <Card.Section className={classes.section}>
-                      <Text mt="md" className={classes.label} c="dimmed">
-                        Perfect for you, if you enjoy
-                      </Text>
-                      {/* <Group spacing={7} mt={5}>
+                      <Card.Section className={classes.section}>
+                        <Text mt="md" className={classes.label} c="dimmed">
+                          Perfect for you, if you enjoy
+                        </Text>
+                        {/* <Group spacing={7} mt={5}>
                         {spot.rating}
                       </Group> */}
-                      <Group position="center">
-                        <Rating value={spot.rating} fractions={2} readOnly />
-                      </Group>
-                    </Card.Section>
+                        <Group position="center">
+                          <Rating value={spot.rating} fractions={2} readOnly />
+                        </Group>
+                      </Card.Section>
 
-                    <Group mt="xs">
-                      <Link to={`/spots/rome/${spot._id}`}>
-                        <Button radius="md" style={{ flex: 1 }}>
-                          Show details
-                        </Button>
-                      </Link>
-                      <ActionIcon variant="default" radius="md" size={36}>
-                        <IconHeart size="1.1rem" className={classes.like} stroke={1.5} />
-                      </ActionIcon>
-                    </Group>
-                  </Card>
-                </div>
-              ))}
+                      <Group mt="xs">
+                        <Link to={`/spots/london/${spot._id}`}>
+                          <Button radius="md" style={{ flex: 1 }}>
+                            Show details
+                          </Button>
+                        </Link>
+                        <ActionIcon variant="default" radius="md" size={36}>
+                          <IconHeart
+                            size="1.1rem"
+                            className={classes.like}
+                            stroke={1.5}
+                          />
+                        </ActionIcon>
+                      </Group>
+                    </Card>
+                  </div>
+                ))}
             </Flex>
           </Container>
         </>
       ) : (
-        <div aria-label="Orange and tan hamster running in a metal wheel" role="img" className="wheel-and-hamster">
+        <div
+          aria-label="Orange and tan hamster running in a metal wheel"
+          role="img"
+          className="wheel-and-hamster"
+        >
           <div className="wheel"></div>
           <div className="hamster">
             <div className="hamster__body">
@@ -153,4 +179,5 @@ export function Rome() {
     </>
   );
 }
+
 export default Rome;
