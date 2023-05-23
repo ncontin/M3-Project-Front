@@ -48,7 +48,7 @@ export function London() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("${import.meta.env.VITE_BASE_API_URL}/api/spots");
+      const response = await axios.get(`${import.meta.env.VITE_BASE_API_URL}/api/spots`);
       if (response.status === 200) {
         const londonSpots = response.data.filter((spot) => spot.city === "London");
         setSpots(londonSpots);
