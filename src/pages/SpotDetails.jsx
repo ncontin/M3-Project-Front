@@ -6,14 +6,24 @@ function SpotDetails() {
   const { spotId } = useParams();
   const navigate = useNavigate();
   const [spot, setSpot] = useState();
-
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState("");
   const fetchSpot = async () => {
     try {
       const response = await axios.get(`${import.meta.env.VITE_BASE_API_URL}/api/spots/${spotId}`);
-      console.log(response.status);
       if (response.status === 200) {
-        console.log(response.data);
         setSpot(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchComments = async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_BASE_API_URL}/api/comments?spotId=${spotId}`);
+      if (response.status === 200) {
+        setComments(response.data.comments);
       }
     } catch (error) {
       console.log(error);
@@ -22,8 +32,36 @@ function SpotDetails() {
 
   useEffect(() => {
     fetchSpot();
+    fetchComments();
   }, [spotId]);
 
+  const handleSubmitComment = async (e) => {
+    e.preventDefault();
+
+    try {
+      const localToken = localStorage.getItem("authToken");
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_API_URL}/api/comments`,
+        {
+          spotId: spotId,
+          content: newComment,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localToken}`, //
+          },
+        }
+      );
+
+      if (response.status === 201) {
+        // Comment successfully posted, update the comments list
+        fetchComments();
+        setNewComment(""); // Clear the comment input field
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const handleDelete = async () => {
     try {
       const response = await axios.delete(`${import.meta.env.VITE_BASE_API_URL}/api/spots/${spotId}`);
@@ -48,8 +86,20 @@ function SpotDetails() {
           <button type="button" onClick={handleDelete}>
             Delete
           </button>
+
+          <h3>Comments:</h3>
+          {comments.length > 0 ? (
+            <ul>
+              {comments.map((comment) => (
+                <li key={comment._id}>{comment.content}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>No comments yet.</p>
+          )}
         </>
       ) : (
+        // Render loading state
         <div aria-label="Orange and tan hamster running in a metal wheel" role="img" className="wheel-and-hamster">
           <div className="wheel"></div>
           <div className="hamster">
@@ -69,6 +119,14 @@ function SpotDetails() {
           <div className="spoke"></div>
         </div>
       )}
+      <form onSubmit={handleSubmitComment}>
+        <textarea
+          value={newComment}
+          onChange={(e) => setNewComment(e.target.value)}
+          placeholder="Write a comment..."
+        ></textarea>
+        <button type="submit">Post Comment</button>
+      </form>
     </>
   );
 }
