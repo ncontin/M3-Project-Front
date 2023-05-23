@@ -18,7 +18,7 @@ import { Link } from "react-router-dom";
 
 const Spots = () => {
   return (
-    <Box w={1680} mx="auto">
+    <Container mt={30} mb={30} size={1920}>
       <Text mt={50} ml={50}>
         Find Spots in your city
       </Text>
@@ -35,11 +35,9 @@ const Spots = () => {
         <Rome />
         <Barcelona />
       </Flex>
-    </Box>
+    </Container>
   );
 };
-
-
 
 export default Spots;
 
