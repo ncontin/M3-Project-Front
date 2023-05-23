@@ -10,7 +10,7 @@ const UpdatePage = () => {
 
   const fetchSpot = async () => {
     try {
-      const response = await axios.get(`http://localhost:5005/api/spots/${spotId}`);
+      const response = await axios.get(`${import.meta.env.VITE_BASE_API_URL}/api/spots/${spotId}`);
       const spot = response.data;
       delete spot._id;
       console.log(spot);
@@ -51,7 +51,7 @@ const UpdatePage = () => {
     const payload = { ...inputs };
 
     try {
-      const response = await axios.put(`http://localhost:5005/api/spots/${spotId}`, payload, {
+      const response = await axios.put(`${import.meta.env.VITE_BASE_API_URL}/api/spots/${spotId}`, payload, {
         headers: {
           "Content-Type": "application/json",
         },

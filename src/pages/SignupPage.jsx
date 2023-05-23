@@ -32,10 +32,7 @@ function SignupPage() {
     // Create an object representing the request body
     const requestBody = { username, password };
     try {
-      const response = await axios.post(
-        `http://localhost:5005/auth/signup`,
-        requestBody
-      );
+      const response = await axios.post(`${import.meta.env.VITE_BASE_API_URL}/auth/signup`, requestBody);
       if (response.status === 201) {
         navigate("/login");
       }
@@ -59,12 +56,7 @@ function SignupPage() {
           })}
         >
           Welcome to{" "}
-          <Text
-            component="span"
-            variant="gradient"
-            gradient={{ from: "blue", to: "cyan" }}
-            inherit
-          >
+          <Text component="span" variant="gradient" gradient={{ from: "blue", to: "cyan" }} inherit>
             KoolSpots!
           </Text>
         </Title>

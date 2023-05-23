@@ -19,16 +19,13 @@ import {
 
 const useStyles = createStyles((theme) => ({
   card: {
-    backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
+    backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
     width: rem(350),
     height: rem(480),
   },
 
   section: {
-    borderBottom: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    }`,
+    borderBottom: `${rem(1)} solid ${theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]}`,
     paddingLeft: theme.spacing.md,
     paddingRight: theme.spacing.md,
     paddingBottom: theme.spacing.md,
@@ -51,11 +48,9 @@ export function Barcelona() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:5005/api/spots");
+      const response = await axios.get(`${import.meta.env.VITE_BASE_API_URL}/api/spots`);
       if (response.status === 200) {
-        const barcelonaSpots = response.data.filter(
-          (spot) => spot.city === "Barcelona"
-        );
+        const barcelonaSpots = response.data.filter((spot) => spot.city === "Barcelona");
         setSpots(barcelonaSpots);
       }
     } catch (error) {
@@ -84,13 +79,7 @@ export function Barcelona() {
             >
               {spots.map((spot) => (
                 <div key={spot._id}>
-                  <Card
-                    withBorder
-                    radius="md"
-                    p="md"
-                    className={classes.card}
-                    width={200}
-                  >
+                  <Card withBorder radius="md" p="md" className={classes.card} width={200}>
                     <Card.Section>
                       <Image
                         src={
@@ -132,11 +121,7 @@ export function Barcelona() {
                         </Button>
                       </Link>
                       <ActionIcon variant="default" radius="md" size={36}>
-                        <IconHeart
-                          size="1.1rem"
-                          className={classes.like}
-                          stroke={1.5}
-                        />
+                        <IconHeart size="1.1rem" className={classes.like} stroke={1.5} />
                       </ActionIcon>
                     </Group>
                   </Card>
@@ -146,11 +131,7 @@ export function Barcelona() {
           </Container>
         </>
       ) : (
-        <div
-          aria-label="Orange and tan hamster running in a metal wheel"
-          role="img"
-          className="wheel-and-hamster"
-        >
+        <div aria-label="Orange and tan hamster running in a metal wheel" role="img" className="wheel-and-hamster">
           <div className="wheel"></div>
           <div className="hamster">
             <div className="hamster__body">

@@ -20,7 +20,7 @@ const CreateSpot = () => {
     };
 
     try {
-      const response = await axios.post("http://localhost:5005/api/spots/", payload);
+      const response = await axios.post(`${import.meta.env.VITE_BASE_API_URL}/api/spots/`, payload);
 
       if (response.status === 201) {
         const newSpot = response.data;

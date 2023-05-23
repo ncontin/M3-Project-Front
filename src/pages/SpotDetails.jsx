@@ -9,7 +9,7 @@ function SpotDetails() {
 
   const fetchSpot = async () => {
     try {
-      const response = await axios.get(`http://localhost:5005/api/spots/${spotId}`);
+      const response = await axios.get(`${import.meta.env.VITE_BASE_API_URL}/api/spots/${spotId}`);
       console.log(response.status);
       if (response.status === 200) {
         console.log(response.data);
@@ -26,7 +26,7 @@ function SpotDetails() {
 
   const handleDelete = async () => {
     try {
-      const response = await axios.delete(`http://localhost:5005/api/spots/${spotId}`);
+      const response = await axios.delete(`${import.meta.env.VITE_BASE_API_URL}/api/spots/${spotId}`);
       if (response.status === 200) {
         navigate("/");
       }
