@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
 const UpdatePage = () => {
   const { spotId } = useParams();
@@ -9,8 +10,8 @@ const UpdatePage = () => {
 
   const fetchSpot = async () => {
     try {
-      const response = await fetch(`http://localhost:5005/api/spots/${spotId}`);
-      const spot = await response.json();
+      const response = await axios.get(`http://localhost:5005/api/spots/${spotId}`);
+      const spot = response.data;
       delete spot._id;
       console.log(spot);
       console.log(inputs);
@@ -50,12 +51,10 @@ const UpdatePage = () => {
     const payload = { ...inputs };
 
     try {
-      const response = await fetch(`http://localhost:5005/api/spots/${spotId}`, {
-        method: "PUT",
+      const response = await axios.put(`http://localhost:5005/api/spots/${spotId}`, payload, {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload),
       });
       if (response.status === 200) {
         console.log("All good");

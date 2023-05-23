@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const CreateSpot = () => {
   const [title, setTitle] = useState("");
@@ -19,25 +20,19 @@ const CreateSpot = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:5005/api/spots/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+      const response = await axios.post("http://localhost:5005/api/spots/", payload);
 
-      if (response.ok) {
-        const newSpot = await response.json();
+      if (response.status === 201) {
+        const newSpot = response.data;
         console.log("New spot created:", newSpot);
-        //perform any necessary actions upon successful spot creation
+        // perform any necessary actions upon successful spot creation
       } else {
         console.error("Error creating spot:", response.status);
-        //handle the error appropriately
+        // handle the error appropriately
       }
     } catch (error) {
       console.error("Error creating spot:", error);
-      //handle the error appropriately
+      // handle the error appropriately
     }
   };
 

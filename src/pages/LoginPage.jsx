@@ -14,6 +14,7 @@ import { FooterSocial } from "./FooterSocial";
 import { AuthContext } from "../context/AuthContext";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -25,17 +26,16 @@ function LoginPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     try {
-      const response = await fetch("http://localhost:5005/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
+      const response = await axios.post("http://localhost:5005/auth/login", {
+        username,
+        password,
       });
+
       if (response.status === 200) {
-        const tokenFromResponse = await response.json();
-        setToken(tokenFromResponse.authToken);
+        const tokenFromResponse = response.data.authToken;
+        setToken(tokenFromResponse);
         setIsLoggedIn(true);
         navigate("/spots");
         console.log("logging in");
@@ -44,6 +44,7 @@ function LoginPage() {
       console.log(error);
     }
   };
+
   return (
     <>
       {" "}
@@ -80,12 +81,7 @@ function LoginPage() {
               value={password}
               onChange={(event) => setPassword(event.target.value)}
             />
-            {/* <Group position="apart" mt="lg">
-              <Checkbox label="Remember me" />
-              <Anchor component="button" size="sm">
-                Forgot password?
-              </Anchor>
-            </Group> */}
+
             <Button fullWidth mt="xl" type="submit">
               Sign in
             </Button>
@@ -98,62 +94,3 @@ function LoginPage() {
 }
 
 export default LoginPage;
-
-// import { useContext, useState } from "react";
-// import { AuthContext } from "../src/context/AuthContext";
-// import { Link, useNavigate } from "react-router-dom";
-
-// const LoginPage = () => {
-//   const navigate = useNavigate();
-
-//   const { setToken } = useContext(AuthContext);
-
-//   const [username, setUsername] = useState("");
-//   const [password, setPassword] = useState("");
-
-//   const handleSubmit = async (event) => {
-//     event.preventDefault();
-//     const response = await fetch("http://localhost:5005/auth/login", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({ username, password }),
-//     });
-//     if (response.status === 200) {
-//       const tokenFromResponse = await response.json();
-//       setToken(tokenFromResponse);
-//       navigate("/profile");
-//     }
-//   };
-
-//   return (
-//     <>
-//       <h1>Login</h1>
-//       <Link to="/profile">Profile</Link>
-//       <form onSubmit={handleSubmit}>
-//         <label>
-//           Email
-//           <input
-//             type="text"
-//             required
-//             value={username}
-//             onChange={(event) => setUsername(event.target.value)}
-//           />
-//         </label>
-//         <label>
-//           Password
-//           <input
-//             type="password"
-//             required
-//             value={password}
-//             onChange={(event) => setPassword(event.target.value)}
-//           />
-//         </label>
-//         <button type="submit">Log In</button>
-//       </form>
-//     </>
-//   );
-// };
-
-// export default LoginPage;
