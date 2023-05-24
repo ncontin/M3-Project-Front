@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IconHeart } from "@tabler/icons-react";
 import {
   Card,
@@ -16,6 +16,7 @@ import {
   Container,
   Rating,
 } from "@mantine/core";
+
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -45,6 +46,8 @@ const useStyles = createStyles((theme) => ({
 export function London() {
   const { classes, theme } = useStyles();
   const [spots, setSpots] = useState([]);
+  const navigate = useNavigate ();
+
 
   const fetchData = async () => {
     try {
@@ -55,6 +58,7 @@ export function London() {
       }
     } catch (error) {
       console.log(error);
+      navigate ("/error-500");
     }
   };
 

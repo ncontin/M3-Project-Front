@@ -3,6 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 
 const ProfilePage = () => {
   const { logout } = useContext(AuthContext);
+  
 
   return (
     <>

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IconHeart } from "@tabler/icons-react";
 import {
   Card,
@@ -45,6 +45,8 @@ const useStyles = createStyles((theme) => ({
 export function Rome() {
   const { classes, theme } = useStyles();
   const [spots, setSpots] = useState([]);
+  const navigate = useNavigate ();
+
 
   const fetchData = async () => {
     try {
@@ -55,6 +57,7 @@ export function Rome() {
       }
     } catch (error) {
       console.log(error);
+      navigate ("/error-500");
     }
   };
 

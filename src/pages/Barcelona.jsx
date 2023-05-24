@@ -16,6 +16,7 @@ import {
   Container,
   Rating,
 } from "@mantine/core";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -45,6 +46,7 @@ const useStyles = createStyles((theme) => ({
 export function Barcelona() {
   const { classes, theme } = useStyles();
   const [spots, setSpots] = useState([]);
+  const navigate = useNavigate ();
 
   const fetchData = async () => {
     try {
@@ -55,6 +57,7 @@ export function Barcelona() {
       }
     } catch (error) {
       console.log(error);
+      navigate ("/error-500");
     }
   };
 

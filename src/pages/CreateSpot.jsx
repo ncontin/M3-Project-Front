@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CreateSpot = () => {
   const [title, setTitle] = useState("");
@@ -7,6 +8,7 @@ const CreateSpot = () => {
   const [address, setAddress] = useState("");
   const [rating, setRating] = useState("");
   const [city, setCity] = useState("London");
+  const navigate = useNavigate ();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,6 +34,7 @@ const CreateSpot = () => {
       }
     } catch (error) {
       console.error("Error creating spot:", error);
+      navigate ("/error-500");
       // handle the error appropriately
     }
   };
