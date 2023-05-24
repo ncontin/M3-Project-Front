@@ -47,6 +47,7 @@ const useStyles = createStyles((theme) => ({
 export function Barcelona() {
   const { classes, theme } = useStyles();
   const [spots, setSpots] = useState([]);
+  const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
 
   const fetchData = async () => {
@@ -68,7 +69,6 @@ export function Barcelona() {
 
   return (
     <>
-      <Search searchText={searchText} setSearchText={setSearchText} />
       {spots.length > 0 ? (
         <>
           <Container mt={30} mb={30} size={1920}>
@@ -83,50 +83,56 @@ export function Barcelona() {
               direction="row"
               wrap="wrap"
             >
-              {spots.map((spot) => (
-                <div key={spot._id}>
-                  <Card withBorder radius="md" p="md" className={classes.card} width={200}>
-                    <Card.Section>
-                      <Image src={`${spot.imageUrl}`} alt={"title"} height={180} />
-                    </Card.Section>
+              {spots
+                .filter((spot) => {
+                  if (spot.title.toLowerCase().includes(searchText.toLowerCase())) {
+                    return spot;
+                  }
+                })
+                .map((spot) => (
+                  <div key={spot._id}>
+                    <Card withBorder radius="md" p="md" className={classes.card} width={200}>
+                      <Card.Section>
+                        <Image src={`${spot.imageUrl}`} alt={"title"} height={180} />
+                      </Card.Section>
 
-                    <Card.Section className={classes.section} mt="md">
-                      <Group position="apart">
-                        <Text fz="lg" fw={500}>
-                          {spot.title}
+                      <Card.Section className={classes.section} mt="md">
+                        <Group position="apart">
+                          <Text fz="lg" fw={500}>
+                            {spot.title}
+                          </Text>
+                          <Badge size="sm">{spot.city}</Badge>
+                        </Group>
+                        <Text fz="sm" mt="xs">
+                          {spot.description}
                         </Text>
-                        <Badge size="sm">{spot.city}</Badge>
-                      </Group>
-                      <Text fz="sm" mt="xs">
-                        {spot.description}
-                      </Text>
-                    </Card.Section>
+                      </Card.Section>
 
-                    <Card.Section className={classes.section}>
-                      <Text mt="md" className={classes.label} c="dimmed">
-                        Perfect for you, if you enjoy
-                      </Text>
-                      {/* <Group spacing={7} mt={5}>
+                      <Card.Section className={classes.section}>
+                        <Text mt="md" className={classes.label} c="dimmed">
+                          Perfect for you, if you enjoy
+                        </Text>
+                        {/* <Group spacing={7} mt={5}>
                         {spot.rating}
                       </Group> */}
-                      <Group position="center">
-                        <Rating value={spot.rating} fractions={2} readOnly />
-                      </Group>
-                    </Card.Section>
+                        <Group position="center">
+                          <Rating value={spot.rating} fractions={2} readOnly />
+                        </Group>
+                      </Card.Section>
 
-                    <Group mt="xs">
-                      <Link to={`/spots/barcelona/${spot._id}`}>
-                        <Button radius="md" style={{ flex: 1 }}>
-                          Show details
-                        </Button>
-                      </Link>
-                      <ActionIcon variant="default" radius="md" size={36}>
-                        <IconHeart size="1.1rem" className={classes.like} stroke={1.5} />
-                      </ActionIcon>
-                    </Group>
-                  </Card>
-                </div>
-              ))}
+                      <Group mt="xs">
+                        <Link to={`/spots/barcelona/${spot._id}`}>
+                          <Button radius="md" style={{ flex: 1 }}>
+                            Show details
+                          </Button>
+                        </Link>
+                        <ActionIcon variant="default" radius="md" size={36}>
+                          <IconHeart size="1.1rem" className={classes.like} stroke={1.5} />
+                        </ActionIcon>
+                      </Group>
+                    </Card>
+                  </div>
+                ))}
             </Flex>
           </Container>
         </>
