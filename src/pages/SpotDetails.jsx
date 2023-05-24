@@ -21,9 +21,10 @@ function SpotDetails() {
 
   const fetchComments = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BASE_API_URL}/api/comments?spotId=${spotId}`);
+      const response = await axios.get(`${import.meta.env.VITE_BASE_API_URL}/api/comments/${spotId}`);
       if (response.status === 200) {
-        setComments(response.data.comments);
+        console.log(response.data);
+        setComments(response.data);
       }
     } catch (error) {
       console.log(error);
