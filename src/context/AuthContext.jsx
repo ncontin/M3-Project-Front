@@ -10,20 +10,16 @@ function AuthProviderWrapper({ children }) {
   // const [user, setUser] = useState(null);
 
   const verifyToken = async (currentToken) => {
-    try {
-      const response = await axios.get(`${VITE_BASE_API_URL}/auth/verify`, {
-        headers: {
-          Authorization: `Bearer ${currentToken}`,
-        },
-      });
-      if (response.status === 200) {
-        const parsed = response.data;
-        setToken(currentToken);
-        setIsLoggedIn(true);
-        console.log(parsed);
-      }
-    } catch (error) {
-      console.error(error);
+    const response = await fetch("VITE_BASE_API_URL/auth/verify", {
+      headers: {
+        Authorization: `Bearer ${currentToken}`,
+      },
+    });
+    if (response.status === 200) {
+      const parsed = await response.json();
+      setToken(currentToken);
+      setIsLoggedIn(true);
+      console.log(parsed);
     }
     setIsLoading(false);
   };
@@ -52,7 +48,9 @@ function AuthProviderWrapper({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ token, setToken, isLoggedIn, isLoading, setIsLoggedIn, logout }}>
+    <AuthContext.Provider
+      value={{ token, setToken, isLoggedIn, isLoading, setIsLoggedIn, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );
