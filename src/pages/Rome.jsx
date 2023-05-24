@@ -20,16 +20,13 @@ import Search from "../components/Search";
 
 const useStyles = createStyles((theme) => ({
   card: {
-    backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
+    backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
     width: rem(350),
     height: rem(402),
   },
 
   section: {
-    borderBottom: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    }`,
+    borderBottom: `${rem(1)} solid ${theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]}`,
     paddingLeft: theme.spacing.md,
     paddingRight: theme.spacing.md,
     paddingBottom: theme.spacing.md,
@@ -54,7 +51,7 @@ export function Rome() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:5005/api/spots");
+      const response = await axios.get(`${import.meta.env.VITE_BASE_API_URL}/api/spots`);
       if (response.status === 200) {
         const romeSpots = response.data.filter((spot) => spot.city === "Rome");
         setSpots(romeSpots);
@@ -87,27 +84,15 @@ export function Rome() {
             >
               {spots
                 .filter((spot) => {
-                  if (
-                    spot.title.toLowerCase().includes(searchText.toLowerCase())
-                  ) {
+                  if (spot.title.toLowerCase().includes(searchText.toLowerCase())) {
                     return spot;
                   }
                 })
                 .map((spot) => (
                   <div key={spot._id}>
-                    <Card
-                      withBorder
-                      radius="md"
-                      p="md"
-                      className={classes.card}
-                      width={200}
-                    >
+                    <Card withBorder radius="md" p="md" className={classes.card} width={200}>
                       <Card.Section>
-                        <Image
-                          src={`${spot.imageUrl}`}
-                          alt={"title"}
-                          height={180}
-                        />
+                        <Image src={`${spot.imageUrl}`} alt={"title"} height={180} />
                       </Card.Section>
 
                       <Card.Section className={classes.section} mt="md">
@@ -141,11 +126,7 @@ export function Rome() {
                           </Button>
                         </Link>
                         <ActionIcon variant="default" radius="md" size={36}>
-                          <IconHeart
-                            size="1.1rem"
-                            className={classes.like}
-                            stroke={1.5}
-                          />
+                          <IconHeart size="1.1rem" className={classes.like} stroke={1.5} />
                         </ActionIcon>
                       </Group>
                     </Card>
@@ -155,11 +136,7 @@ export function Rome() {
           </Container>
         </>
       ) : (
-        <div
-          aria-label="Orange and tan hamster running in a metal wheel"
-          role="img"
-          className="wheel-and-hamster"
-        >
+        <div aria-label="Orange and tan hamster running in a metal wheel" role="img" className="wheel-and-hamster">
           <div className="wheel"></div>
           <div className="hamster">
             <div className="hamster__body">

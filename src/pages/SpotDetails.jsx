@@ -9,9 +9,7 @@ function SpotDetails() {
 
   const fetchSpot = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:5005/api/spots/${spotId}`
-      );
+      const response = await axios.get(`${import.meta.env.VITE_BASE_API_URL}/api/spots/${spotId}`);
       console.log(response.status);
       if (response.status === 200) {
         console.log(response.data);
@@ -19,7 +17,7 @@ function SpotDetails() {
       }
     } catch (error) {
       console.log(error);
-      navigate ("/error-500");
+      navigate("/error-500");
     }
   };
 
@@ -29,9 +27,7 @@ function SpotDetails() {
 
   const handleDelete = async () => {
     try {
-      const response = await axios.delete(
-        `http://localhost:5005/api/spots/${spotId}`
-      );
+      const response = await axios.delete(`${import.meta.env.VITE_BASE_API_URL}/api/spots/${spotId}`);
       if (response.status === 200) {
         navigate("/");
       }
@@ -56,11 +52,7 @@ function SpotDetails() {
           </button>
         </>
       ) : (
-        <div
-          aria-label="Orange and tan hamster running in a metal wheel"
-          role="img"
-          className="wheel-and-hamster"
-        >
+        <div aria-label="Orange and tan hamster running in a metal wheel" role="img" className="wheel-and-hamster">
           <div className="wheel"></div>
           <div className="hamster">
             <div className="hamster__body">

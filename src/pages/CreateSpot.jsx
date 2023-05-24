@@ -8,7 +8,7 @@ const CreateSpot = () => {
   const [address, setAddress] = useState("");
   const [rating, setRating] = useState("");
   const [city, setCity] = useState("London");
-  const navigate = useNavigate ();
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,10 +24,8 @@ const CreateSpot = () => {
     fData.append("city", city);
 
     try {
-      const response = await axios.post(
-        "http://localhost:5005/api/spots/",
-        fData
-      );
+      const response = await axios.post(`${import.meta.env.VITE_BASE_API_URL}/api/spots/`, fData);
+      //fix 
 
       if (response.status === 201) {
         const newSpot = response.data;
@@ -39,7 +37,7 @@ const CreateSpot = () => {
       }
     } catch (error) {
       console.error("Error creating spot:", error);
-      navigate ("/error-500");
+      navigate("/error-500");
       // handle the error appropriately
     }
   };
@@ -50,38 +48,19 @@ const CreateSpot = () => {
       <form encType="multipart/form-data" onSubmit={handleSubmit}>
         <div>
           <label>Title:</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
+          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
         </div>
         <div>
           <label>Description:</label>
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-          ></textarea>
+          <textarea value={description} onChange={(e) => setDescription(e.target.value)} required></textarea>
         </div>
         <div>
           <label>Address:</label>
-          <input
-            type="text"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            required
-          />
+          <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} required />
         </div>
         <div>
           <label>Rating:</label>
-          <input
-            type="number"
-            value={rating}
-            onChange={(e) => setRating(e.target.value)}
-            required
-          />
+          <input type="number" value={rating} onChange={(e) => setRating(e.target.value)} required />
         </div>
         <div>
           <label>City:</label>
@@ -93,12 +72,7 @@ const CreateSpot = () => {
         </div>
         <div>
           <label>Image</label>
-          <input
-            type="file"
-            name="image"
-            accept="image/png, image/jpg"
-            required
-          />
+          <input type="file" name="image" accept="image/png, image/jpg" required />
         </div>
         <button type="submit">Create Spot</button>
       </form>
