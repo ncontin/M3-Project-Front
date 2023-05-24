@@ -251,7 +251,7 @@ function Navbar() {
               </HoverCard.Dropdown>
             </HoverCard> */}
             <Link to="/spots" className={classes.link}>
-              CoolSpots
+              KoolSpots
             </Link>
             {/* <a href="#" className={classes.link}>
               Academy
@@ -314,10 +314,17 @@ function Navbar() {
         <ScrollArea h={`calc(100vh - ${rem(60)})`} mx="-md">
           <Divider my="sm" color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"} />
 
-          <a href="#" className={classes.link}>
-            Home
-          </a>
-          <UnstyledButton className={classes.link} onClick={toggleLinks}>
+          <Link to="/" className={classes.link}>
+            <IconCurrencyBitcoin width={30} /> Home
+          </Link>
+          <Link to="/spots" className={classes.link}>
+            KoolSpots
+          </Link>
+          <Link to="/spots/create">
+            <Button>Create a spot</Button>
+          </Link>
+
+          {/* <UnstyledButton className={classes.link} onClick={toggleLinks}>
             <Center inline>
               <Box component="span" mr={5}>
                 Features
@@ -331,14 +338,34 @@ function Navbar() {
           </a>
           <a href="#" className={classes.link}>
             Academy
-          </a>
+          </a> */}
 
           <Divider my="sm" color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"} />
 
           <Group position="center" grow pb="xl" px="md">
             <SwitchToggle />
-            <Button variant="default">Log in</Button>
-            <Button>Sign up</Button>
+            {isLoggedIn && (
+              <Link to="/profile">
+                <Button>Profile</Button>
+              </Link>
+            )}
+            {!isLoggedIn && (
+              <Link to="/login">
+                <Button variant="default">Log in</Button>
+              </Link>
+            )}
+            {!isLoggedIn && (
+              <Link to="/signup">
+                <Button>Sign up</Button>
+              </Link>
+            )}
+            {isLoggedIn && (
+              <Link to="/login">
+                <Button type="button" onClick={logout}>
+                  Log Out
+                </Button>
+              </Link>
+            )}
           </Group>
         </ScrollArea>
       </Drawer>
