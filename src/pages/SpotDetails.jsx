@@ -10,7 +10,9 @@ function SpotDetails() {
   const [newComment, setNewComment] = useState("");
   const fetchSpot = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BASE_API_URL}/api/spots/${spotId}`);
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_API_URL}/api/spots/${spotId}`
+      );
       if (response.status === 200) {
         setSpot(response.data);
       }
@@ -21,7 +23,9 @@ function SpotDetails() {
 
   const fetchComments = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BASE_API_URL}/api/comments/${spotId}`);
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_API_URL}/api/comments/${spotId}`
+      );
       if (response.status === 200) {
         console.log(response.data);
         setComments(response.data);
@@ -66,7 +70,9 @@ function SpotDetails() {
   };
   const handleDelete = async () => {
     try {
-      const response = await axios.delete(`${import.meta.env.VITE_BASE_API_URL}/api/spots/${spotId}`);
+      const response = await axios.delete(
+        `${import.meta.env.VITE_BASE_API_URL}/api/spots/${spotId}`
+      );
       if (response.status === 200) {
         navigate("/");
       }
@@ -84,6 +90,7 @@ function SpotDetails() {
           <h3>{spot.rating}</h3>
           <h3>{spot.city}</h3>
           <h3>{spot.address}</h3>
+          <h3>Created by= {spot.user_id.username}</h3>
           <img src={`${spot.imageUrl}`} alt="hello" />
           <Link to={`/spots/update/${spotId}`}>Update</Link>
           <button type="button" onClick={handleDelete}>
@@ -103,7 +110,11 @@ function SpotDetails() {
         </>
       ) : (
         // Render loading state
-        <div aria-label="Orange and tan hamster running in a metal wheel" role="img" className="wheel-and-hamster">
+        <div
+          aria-label="Orange and tan hamster running in a metal wheel"
+          role="img"
+          className="wheel-and-hamster"
+        >
           <div className="wheel"></div>
           <div className="hamster">
             <div className="hamster__body">

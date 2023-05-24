@@ -43,12 +43,20 @@ function App() {
           <Route path="/spots" element={<Spots />} />
           <Route path="/spots/london" element={<London title={"London"} />} />
           <Route path="/spots/london/:spotId" element={<SpotDetails />} />
-          <Route path="/spots/create" element={<CreateSpot />} />
+
           <Route path="/spots/rome" element={<Rome />} />
           <Route path="/spots/rome/:spotId" element={<SpotDetails />} />
           <Route path="/spots/barcelona" element={<Barcelona />} />
           <Route path="/spots/barcelona/:spotId" element={<SpotDetails />} />
           <Route path="/spots/update/:spotId" element={<UpdatePage />} />
+          <Route
+            path="/spots/create"
+            element={
+              <PrivateRoute>
+                <CreateSpot />
+              </PrivateRoute>
+            }
+          />
           <Route
             path="/profile"
             element={

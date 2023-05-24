@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 const CreateSpot = () => {
+  const { token } = useContext(AuthContext);
+  console.log(token);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
@@ -24,9 +27,13 @@ const CreateSpot = () => {
     fData.append("city", city);
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BASE_API_URL}/api/spots/`, fData);
-      //fix 
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_API_URL}/api/spots/`,
+        fData,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
 
+      //fix
       if (response.status === 201) {
         const newSpot = response.data;
         console.log("New spot created:", newSpot);
@@ -48,19 +55,38 @@ const CreateSpot = () => {
       <form encType="multipart/form-data" onSubmit={handleSubmit}>
         <div>
           <label>Title:</label>
-          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
         </div>
         <div>
           <label>Description:</label>
-          <textarea value={description} onChange={(e) => setDescription(e.target.value)} required></textarea>
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          ></textarea>
         </div>
         <div>
           <label>Address:</label>
-          <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} required />
+          <input
+            type="text"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            required
+          />
         </div>
         <div>
           <label>Rating:</label>
-          <input type="number" value={rating} onChange={(e) => setRating(e.target.value)} required />
+          <input
+            type="number"
+            value={rating}
+            onChange={(e) => setRating(e.target.value)}
+            required
+          />
         </div>
         <div>
           <label>City:</label>
@@ -72,7 +98,12 @@ const CreateSpot = () => {
         </div>
         <div>
           <label>Image</label>
-          <input type="file" name="image" accept="image/png, image/jpg" required />
+          <input
+            type="file"
+            name="image"
+            accept="image/png, image/jpg"
+            required
+          />
         </div>
         <button type="submit">Create Spot</button>
       </form>
