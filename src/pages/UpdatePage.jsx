@@ -19,6 +19,7 @@ const UpdatePage = () => {
       setIsLoading(false);
     } catch (error) {
       console.log(error);
+      navigate ("/error-500");
     }
   };
 

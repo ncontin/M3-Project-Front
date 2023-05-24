@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IconHeart } from "@tabler/icons-react";
 import {
   Card,
@@ -50,6 +50,7 @@ export function London() {
   const { classes, theme } = useStyles();
   const [spots, setSpots] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const navigate = useNavigate();
 
   const fetchData = async () => {
     try {
@@ -62,6 +63,7 @@ export function London() {
       }
     } catch (error) {
       console.log(error);
+      navigate("/error-500");
     }
   };
 

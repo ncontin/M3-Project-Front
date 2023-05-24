@@ -23,6 +23,7 @@ function LoginPage() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -42,6 +43,7 @@ function LoginPage() {
       }
     } catch (error) {
       console.log(error);
+      navigate ("/error-500");
     }
   };
 

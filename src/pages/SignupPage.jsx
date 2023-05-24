@@ -41,6 +41,7 @@ function SignupPage() {
       }
     } catch (error) {
       console.log(error);
+      navigate ("/error-500");
     }
   };
 

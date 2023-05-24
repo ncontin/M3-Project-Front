@@ -19,6 +19,7 @@ function SpotDetails() {
       }
     } catch (error) {
       console.log(error);
+      navigate ("/error-500");
     }
   };
 

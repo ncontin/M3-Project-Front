@@ -15,6 +15,8 @@ import CreateSpot from "./pages/CreateSpot";
 import Rome from "./pages/Rome";
 import Barcelona from "./pages/Barcelona";
 import UpdatePage from "./pages/UpdatePage";
+import Error404Page from "./pages/Error404Page";
+import Error500Page from "./pages/Error500Page";
 
 function App() {
   const [colorScheme, setColorScheme] = useState("light");
@@ -33,6 +35,8 @@ function App() {
       >
         <Navbar />
         <Routes>
+          <Route path="/error-500" element={<Error500Page />} />
+          <Route path="/*" element={<Error404Page />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage />} />
