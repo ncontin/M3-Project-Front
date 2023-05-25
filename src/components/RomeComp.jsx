@@ -18,7 +18,7 @@ const useStyles = createStyles((theme) => ({
     fontWeight: 900,
     color: theme.white,
     lineHeight: 1.2,
-    fontSize: rem(32),
+    fontSize: rem(42),
     marginTop: theme.spacing.xs,
   },
 
@@ -34,29 +34,26 @@ export function RomeComp() {
   const { classes } = useStyles();
 
   return (
-    <Link to="/spots/rome">
-      <Paper
-        shadow="md"
-        p="xl"
-        radius="md"
-        sx={{
-          backgroundImage: `url(https://media.istockphoto.com/id/1323460157/photo/rome-italy-night-city-skyline-at-rome-colosseum-empty-nobody.jpg?b=1&s=170667a&w=0&k=20&c=XE9O_GYWrL_RaFZH0Gw5P3NAW_YL_BSVcbbq9rlLvXE=)`,
-        }}
-        className={classes.card}
-      >
-        <div>
-          <Text className={classes.category} size="xs">
-            Nature
-          </Text>
-          <Title order={3} className={classes.title}>
-            Rome
-          </Title>
-        </div>
-        {/* <Button variant="white" color="dark">
-        Read article
-      </Button> */}
-      </Paper>
-    </Link>
+    <Paper
+      shadow="md"
+      p="xl"
+      radius="md"
+      sx={{
+        backgroundImage: `url(https://res.klook.com/image/upload/Mobile/City/afmqgg5h0jl9wnr1dfmf.jpg)`,
+      }}
+      className={classes.card}
+    >
+      <div>
+        <Title order={3} className={classes.title}>
+          Rome
+        </Title>
+      </div>
+      <Link to="/spots/rome">
+        <Button variant="white" color="dark">
+          See Spots
+        </Button>
+      </Link>
+    </Paper>
   );
 }
 export default RomeComp;

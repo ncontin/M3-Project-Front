@@ -18,7 +18,7 @@ const useStyles = createStyles((theme) => ({
     fontWeight: 900,
     color: theme.white,
     lineHeight: 1.2,
-    fontSize: rem(32),
+    fontSize: rem(42),
     marginTop: theme.spacing.xs,
   },
 
@@ -34,29 +34,26 @@ export function BarcelonaComp() {
   const { classes } = useStyles();
 
   return (
-    <Link to="/spots/barcelona">
-      <Paper
-        shadow="md"
-        p="xl"
-        radius="md"
-        sx={{
-          backgroundImage: `url(https://upload.wikimedia.org/wikipedia/commons/2/26/%CE%A3%CE%B1%CE%B3%CF%81%CE%AC%CE%B4%CE%B1_%CE%A6%CE%B1%CE%BC%CE%AF%CE%BB%CE%B9%CE%B1_2941.jpg)`,
-        }}
-        className={classes.card}
-      >
-        <div>
-          <Text className={classes.category} size="xs">
-            Nature
-          </Text>
-          <Title order={3} className={classes.title}>
-            Barcelona
-          </Title>
-        </div>
-        {/* <Button variant="white" color="dark">
-        Read article
-      </Button> */}
-      </Paper>
-    </Link>
+    <Paper
+      shadow="md"
+      p="xl"
+      radius="md"
+      sx={{
+        backgroundImage: `url(https://upload.wikimedia.org/wikipedia/commons/2/26/%CE%A3%CE%B1%CE%B3%CF%81%CE%AC%CE%B4%CE%B1_%CE%A6%CE%B1%CE%BC%CE%AF%CE%BB%CE%B9%CE%B1_2941.jpg)`,
+      }}
+      className={classes.card}
+    >
+      <div>
+        <Title order={3} className={classes.title}>
+          Barcelona
+        </Title>
+      </div>
+      <Link to="/spots/barcelona">
+        <Button variant="white" color="dark">
+          See Spots
+        </Button>
+      </Link>
+    </Paper>
   );
 }
 export default BarcelonaComp;

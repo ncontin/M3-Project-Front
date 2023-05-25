@@ -23,16 +23,18 @@ function LoginPage() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BASE_API_URL}/auth/login`, {
-        username,
-        password,
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_API_URL}/auth/login`,
+        {
+          username,
+          password,
+        }
+      );
 
       if (response.status === 200) {
         const tokenFromResponse = response.data.authToken;
@@ -43,7 +45,7 @@ function LoginPage() {
       }
     } catch (error) {
       console.log(error);
-      navigate ("/error-500");
+      navigate("/error-500");
     }
   };
 
@@ -62,9 +64,11 @@ function LoginPage() {
         </Title>
         <Text color="dimmed" size="sm" align="center" mt={5}>
           Do not have an account yet?{" "}
-          <Anchor size="sm" component="button">
-            Create account
-          </Anchor>
+          <Link to="/signup">
+            <Anchor size="sm" component="button">
+              Create account
+            </Anchor>
+          </Link>
         </Text>
         <form onSubmit={handleSubmit}>
           <Paper withBorder shadow="md" p={30} mt={30} radius="md">

@@ -24,7 +24,7 @@ const useStyles = createStyles((theme) => ({
     fontWeight: 900,
     color: theme.white,
     lineHeight: 1.2,
-    fontSize: rem(32),
+    fontSize: rem(42),
     marginTop: theme.spacing.xs,
   },
 
@@ -40,29 +40,26 @@ export function Loncomp() {
   const { classes } = useStyles();
 
   return (
-    <Link to="/spots/london">
-      <Paper
-        shadow="md"
-        p="xl"
-        radius="md"
-        sx={{
-          backgroundImage: `url(https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/London_Big_Ben_Phone_box.jpg/800px-London_Big_Ben_Phone_box.jpg)`,
-        }}
-        className={classes.card}
-      >
-        <div>
-          <Text className={classes.category} size="xs">
-            Nature
-          </Text>
-          <Title order={3} className={classes.title}>
-            London
-          </Title>
-        </div>
-        {/* <Button variant="white" color="dark">
-          Read article
-        </Button> */}
-      </Paper>
-    </Link>
+    <Paper
+      shadow="md"
+      p="xl"
+      radius="md"
+      sx={{
+        backgroundImage: `url(https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/London_Big_Ben_Phone_box.jpg/800px-London_Big_Ben_Phone_box.jpg)`,
+      }}
+      className={classes.card}
+    >
+      <div>
+        <Title order={3} className={classes.title}>
+          London
+        </Title>
+      </div>
+      <Link to="/spots/london">
+        <Button variant="white" color="dark">
+          See Spots
+        </Button>
+      </Link>
+    </Paper>
   );
 }
 export default Loncomp;
