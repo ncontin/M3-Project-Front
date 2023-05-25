@@ -26,10 +26,12 @@ const useStyles = createStyles((theme) => ({
     minHeight: "100vh",
   },
   card: {
-    backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
+    backgroundColor:
+      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
     maxWidth: "600px",
     padding: rem(24),
-    boxShadow: theme.colorScheme === "dark" ? theme.shadows.md : theme.shadows.sm,
+    boxShadow:
+      theme.colorScheme === "dark" ? theme.shadows.md : theme.shadows.sm,
   },
   spotImage: {
     marginBottom: rem(16),
@@ -78,7 +80,9 @@ function SpotDetails() {
 
   const fetchSpot = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BASE_API_URL}/api/spots/${spotId}`);
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_API_URL}/api/spots/${spotId}`
+      );
       if (response.status === 200) {
         setSpot(response.data);
       }
@@ -89,7 +93,9 @@ function SpotDetails() {
 
   const fetchComments = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BASE_API_URL}/api/comments/${spotId}`);
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_API_URL}/api/comments/${spotId}`
+      );
       if (response.status === 200) {
         console.log(response.data);
         setComments(response.data);
@@ -135,7 +141,9 @@ function SpotDetails() {
 
   const handleDelete = async () => {
     try {
-      const response = await axios.delete(`${import.meta.env.VITE_BASE_API_URL}/api/spots/${spotId}`);
+      const response = await axios.delete(
+        `${import.meta.env.VITE_BASE_API_URL}/api/spots/${spotId}`
+      );
       if (response.status === 200) {
         navigate("/");
       }
@@ -149,7 +157,11 @@ function SpotDetails() {
       {spot ? (
         <Card withBorder padding="lg" radius="md" className={classes.card}>
           <Card.Section mb="sm">
-            <Image src={spot.imageUrl} alt={spot.title} className={classes.spotImage} />
+            <Image
+              src={spot.imageUrl}
+              alt={spot.title}
+              className={classes.spotImage}
+            />
           </Card.Section>
 
           <Text fw={700} className={classes.title} mt="xs">
@@ -161,7 +173,12 @@ function SpotDetails() {
           </Text>
           <Text size="sm" color="gray" className={classes.rating}>
             Rating:
-            <Rating value={spot.rating} size="xs" readOnly style={{ marginLeft: rem(8) }} />
+            <Rating
+              value={spot.rating}
+              size="xs"
+              readOnly
+              style={{ marginLeft: rem(8) }}
+            />
           </Text>
           <Text size="sm" color="gray" style={{ marginBottom: rem(8) }}>
             City: {spot.city}
@@ -178,7 +195,12 @@ function SpotDetails() {
               Update
             </Button>
           </Link>
-          <Button size="sm" variant="outline" color="red" onClick={handleDelete}>
+          <Button
+            size="sm"
+            variant="outline"
+            color="red"
+            onClick={handleDelete}
+          >
             Delete
           </Button>
 
@@ -190,7 +212,11 @@ function SpotDetails() {
               {comments.map((comment) => (
                 <div key={comment._id} className={classes.comment}>
                   <Group>
-                    <Avatar src={comment.user_id.avatarUrl} alt={comment.user_id.username} radius="xl" />
+                    <Avatar
+                      src={comment.user_id.avatarUrl}
+                      alt={comment.user_id.username}
+                      radius="xl"
+                    />
                     <div>
                       <Text size="sm" weight={700}>
                         {comment.user_id.username}
@@ -218,14 +244,24 @@ function SpotDetails() {
               required
               className={classes.commentInput}
             />
-            <Button type="submit" variant="outline" color="blue" size="sm" mt="sm">
+            <Button
+              type="submit"
+              variant="outline"
+              color="blue"
+              size="sm"
+              mt="sm"
+            >
               Post Comment
             </Button>
           </form>
         </Card>
       ) : (
         // Render loading state
-        <div aria-label="Orange and tan hamster running in a metal wheel" role="img" className="wheel-and-hamster">
+        <div
+          aria-label="Orange and tan hamster running in a metal wheel"
+          role="img"
+          className="wheel-and-hamster"
+        >
           <div className="wheel"></div>
           <div className="hamster">
             <div className="hamster__body">

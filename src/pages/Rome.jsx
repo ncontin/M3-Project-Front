@@ -146,7 +146,7 @@ export function Rome() {
                           </Text>
                           <Badge size="sm">{spot.city}</Badge>
                         </Group>
-                        <Text fz="sm" mt="xs">
+                        <Text fz="sm" mt="xs" mb={40}>
                           {spot.description}
                         </Text>
                       </Card.Section>
