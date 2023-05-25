@@ -19,7 +19,9 @@ import {
   Drawer,
   Collapse,
   ScrollArea,
+  Flex,
   rem,
+  Container,
 } from "@mantine/core";
 // import { MantineLogo } from "@mantine/ds";
 import { useDisclosure } from "@mantine/hooks";
@@ -56,7 +58,10 @@ const useStyles = createStyles((theme) => ({
     },
 
     ...theme.fn.hover({
-      backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[6] : theme.colors.gray[0],
+      backgroundColor:
+        theme.colorScheme === "dark"
+          ? theme.colors.dark[6]
+          : theme.colors.gray[0],
     }),
   },
 
@@ -66,19 +71,27 @@ const useStyles = createStyles((theme) => ({
     borderRadius: theme.radius.md,
 
     ...theme.fn.hover({
-      backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.colors.gray[0],
+      backgroundColor:
+        theme.colorScheme === "dark"
+          ? theme.colors.dark[7]
+          : theme.colors.gray[0],
     }),
 
     "&:active": theme.activeStyles,
   },
 
   dropdownFooter: {
-    backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.colors.gray[0],
+    backgroundColor:
+      theme.colorScheme === "dark"
+        ? theme.colors.dark[7]
+        : theme.colors.gray[0],
     margin: `calc(${theme.spacing.md} * -1)`,
     marginTop: theme.spacing.sm,
     padding: `${theme.spacing.md} calc(${theme.spacing.md} * 2)`,
     paddingBottom: theme.spacing.xl,
-    borderTop: `${rem(1)} solid ${theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[1]}`,
+    borderTop: `${rem(1)} solid ${
+      theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[1]
+    }`,
   },
 
   hiddenMobile: {
@@ -131,9 +144,13 @@ function Navbar() {
   // Subscribe to the AuthContext to gain access to
   // the values from AuthContext.Provider `value` prop
   const { isLoggedIn, logout } = useContext(AuthContext);
-  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
+  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
+    useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
   const { classes, theme } = useStyles();
+  const handleProfileClick = () => {
+    closeDrawer(); // Close the drawer when the "Profile" link is clicked
+  };
 
   const links = mockdata.map((item) => (
     <UnstyledButton className={classes.subLink} key={item.title}>
@@ -155,107 +172,21 @@ function Navbar() {
   //  Update the rendering logic to display different content
   //  depending on whether the user is logged in or not
   return (
-    // <nav>
-    //   <Link to="/">
-    //     <button>Home</button>
-    //   </Link>
-
-    //   {/*    UPDATE     */}
-    //   {isLoggedIn && (
-    //     <>
-    //       <Link to="/cool-spots">
-    //         <button>Cool Spots</button>
-    //       </Link>
-    //       <button>Logout</button>
-    //     </>
-    //   )}
-
-    //   {!isLoggedIn && (
-    //     <>
-    //       <Link to="/signup">
-    //         {" "}
-    //         <button>Sign Up</button>{" "}
-    //       </Link>
-    // <Link to="/login">
-    //   {" "}
-    //   <button>Login</button>{" "}
-    // </Link>
-    //     </>
-    //   )}
-    //    </nav>
-
     <Box>
       <Header height={60} px="md">
         <Group position="apart" sx={{ height: "100%" }}>
-          <Group sx={{ height: "100%" }} spacing={0} className={classes.hiddenMobile}>
-            {/* <a href="/" className={classes.link}>
-              <IconCurrencyBitcoin width={30} />
-            </a> */}
-
+          <Group
+            sx={{ height: "100%" }}
+            spacing={0}
+            className={classes.hiddenMobile}
+          >
             <Link to="/" className={classes.link}>
               <IconCurrencyBitcoin width={30} /> Home
             </Link>
 
-            {/* <HoverCard
-              width={600}
-              position="bottom"
-              radius="md"
-              shadow="md"
-              withinPortal
-            >
-              <HoverCard.Target>
-                <a href="#" className={classes.link}>
-                  <Center inline>
-                    <Box component="span" mr={5}>
-                      Features
-                    </Box>
-                    <IconChevronDown
-                      size={16}
-                      color={theme.fn.primaryColor()}
-                    />
-                  </Center>
-                </a>
-              </HoverCard.Target>
-
-              <HoverCard.Dropdown sx={{ overflow: "hidden" }}>
-                <Group position="apart" px="md">
-                  <Text fw={500}>Features</Text>
-                  <Anchor href="#" fz="xs">
-                    View all
-                  </Anchor>
-                </Group>
-
-                <Divider
-                  my="sm"
-                  mx="-md"
-                  color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
-                />
-
-                <SimpleGrid cols={2} spacing={0}>
-                  {links}
-                </SimpleGrid>
-
-                <div className={classes.dropdownFooter}>
-                  <Group position="apart">
-                    <div>
-                      <Text fw={500} fz="sm">
-                        Get started
-                      </Text>
-                      <Text size="xs" color="dimmed">
-                        Their food sources have decreased, and their numbers
-                      </Text>
-                    </div>
-                    <Button variant="default">Get started</Button>
-                  </Group>
-                </div>
-              </HoverCard.Dropdown>
-            </HoverCard> */}
             <Link to="/spots" className={classes.link}>
               KoolSpots
             </Link>
-            {/* <a href="#" className={classes.link}>
-              Academy
-            </a> */}
           </Group>
 
           <Group className={classes.hiddenMobile}>
@@ -263,12 +194,6 @@ function Navbar() {
             <Link to="/spots/create">
               <Button>Create a spot</Button>
             </Link>
-            {/* <Link to="/profile">
-              <Button>Profile</Button>
-            </Link>
-            <Link to="/login">
-              <Button variant="default">Log in</Button>
-            </Link> */}
 
             {isLoggedIn && (
               <Link to="/profile">
@@ -287,21 +212,21 @@ function Navbar() {
             )}
             {isLoggedIn && (
               <Link to="/login">
-                <Button type="button" onClick={logout}>
+                <Button type="button" variant="default" onClick={logout}>
                   Log Out
                 </Button>
               </Link>
             )}
-
-            {/* <Link to="/signup">
-              <Button>Sign up</Button>
-            </Link> */}
           </Group>
 
-          <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop} />
+          <Burger
+            opened={drawerOpened}
+            onClick={toggleDrawer}
+            className={classes.hiddenDesktop}
+          />
         </Group>
       </Header>
-
+      {/* mobile after this line */}
       <Drawer
         opened={drawerOpened}
         onClose={closeDrawer}
@@ -311,63 +236,65 @@ function Navbar() {
         className={classes.hiddenDesktop}
         zIndex={1000000}
       >
-        <ScrollArea h={`calc(100vh - ${rem(60)})`} mx="-md">
-          <Divider my="sm" color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"} />
+        {/* <ScrollArea h={`calc(100vh - ${rem(60)})`} mx="-md"> */}
+        <Divider
+          my="sm"
+          color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
+        />
 
-          <Link to="/" className={classes.link}>
-            <IconCurrencyBitcoin width={30} /> Home
-          </Link>
-          <Link to="/spots" className={classes.link}>
-            KoolSpots
-          </Link>
-          <Link to="/spots/create">
-            <Button>Create a spot</Button>
-          </Link>
+        <Link to="/" className={classes.link} onClick={handleProfileClick}>
+          <IconCurrencyBitcoin width={30} /> Home
+        </Link>
+        <Link to="/spots" className={classes.link} onClick={handleProfileClick}>
+          <Text
+            ta="center"
+            w={100}
+            className={classes.title}
+            component="span"
+            variant="gradient"
+            gradient={{ from: "blue", to: "cyan" }}
+            inherit
+          >
+            Kool Spots
+          </Text>
+        </Link>
+        <Link to="/spots/create">
+          <Button onClick={handleProfileClick}>Create a spot</Button>
+        </Link>
 
-          {/* <UnstyledButton className={classes.link} onClick={toggleLinks}>
-            <Center inline>
-              <Box component="span" mr={5}>
-                Features
-              </Box>
-              <IconChevronDown size={16} color={theme.fn.primaryColor()} />
-            </Center>
-          </UnstyledButton>
-          <Collapse in={linksOpened}>{links}</Collapse>
-          <a href="#" className={classes.link}>
-            Learn
-          </a>
-          <a href="#" className={classes.link}>
-            Academy
-          </a> */}
+        <Divider
+          my="sm"
+          color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
+        />
 
-          <Divider my="sm" color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"} />
-
-          <Group position="center" grow pb="xl" px="md">
-            <SwitchToggle />
-            {isLoggedIn && (
-              <Link to="/profile">
-                <Button>Profile</Button>
-              </Link>
-            )}
-            {!isLoggedIn && (
-              <Link to="/login">
-                <Button variant="default">Log in</Button>
-              </Link>
-            )}
-            {!isLoggedIn && (
-              <Link to="/signup">
-                <Button>Sign up</Button>
-              </Link>
-            )}
-            {isLoggedIn && (
-              <Link to="/login">
-                <Button type="button" onClick={logout}>
-                  Log Out
-                </Button>
-              </Link>
-            )}
-          </Group>
-        </ScrollArea>
+        <Group position="center" grow pb="xl" px="md">
+          <SwitchToggle />
+          {isLoggedIn && (
+            <Link to="/profile">
+              <Button onClick={handleProfileClick}>Profile</Button>
+            </Link>
+          )}
+          {!isLoggedIn && (
+            <Link to="/login">
+              <Button variant="default" onClick={handleProfileClick}>
+                Log in
+              </Button>
+            </Link>
+          )}
+          {!isLoggedIn && (
+            <Link to="/signup">
+              <Button onClick={handleProfileClick}>Sign up</Button>
+            </Link>
+          )}
+          {isLoggedIn && (
+            <Link to="/login">
+              <Button type="button" onClick={(logout, handleProfileClick)}>
+                Log Out
+              </Button>
+            </Link>
+          )}
+        </Group>
+        {/* </ScrollArea> */}
       </Drawer>
     </Box>
   );
