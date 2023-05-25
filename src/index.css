@@ -1,3 +1,8 @@
+.title-detail {
+  font-size: 50px;
+  text-align: center;
+}
+
 .wheel-and-hamster {
   --dur: 1s;
   position: relative;
