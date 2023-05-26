@@ -5,6 +5,7 @@ import {
   ActionIcon,
   rem,
   Text,
+  Image,
 } from "@mantine/core";
 import {
   IconBrandTwitter,
@@ -46,7 +47,7 @@ export function FooterSocial() {
   return (
     <div className={classes.footer}>
       <Container className={classes.inner}>
-        <IconCurrencyBitcoin />
+        <Image src={"/KoolSpots.ico"} alt={"title"} height={37} width={37} />
 
         <Group spacing={0} className={classes.links} position="right" noWrap>
           <ActionIcon size="lg">

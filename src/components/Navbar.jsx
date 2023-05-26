@@ -22,6 +22,7 @@ import {
   Flex,
   rem,
   Container,
+  Image,
 } from "@mantine/core";
 // import { MantineLogo } from "@mantine/ds";
 import { useDisclosure } from "@mantine/hooks";
@@ -181,7 +182,7 @@ function Navbar() {
             className={classes.hiddenMobile}
           >
             <Link to="/" className={classes.link}>
-              <IconCurrencyBitcoin width={30} /> Home
+              <Image src={"/KoolSpots.ico"} alt={"title"} height={27} /> Home
             </Link>
 
             <Link to="/spots" className={classes.link}>
@@ -243,7 +244,8 @@ function Navbar() {
         />
 
         <Link to="/" className={classes.link} onClick={handleProfileClick}>
-          <IconCurrencyBitcoin width={30} /> Home
+          <Image src={"/KoolSpots.ico"} alt={"title"} height={27} width={27} />{" "}
+          Home
         </Link>
         <Link to="/spots" className={classes.link} onClick={handleProfileClick}>
           <Text
