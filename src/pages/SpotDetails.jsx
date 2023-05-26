@@ -28,16 +28,17 @@ const useStyles = createStyles((theme) => ({
   card: {
     backgroundColor:
       theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-    maxWidth: "600px",
+    maxWidth: "500px",
     padding: rem(24),
     boxShadow:
       theme.colorScheme === "dark" ? theme.shadows.md : theme.shadows.sm,
   },
   spotImage: {
     marginBottom: rem(16),
-    maxHeight: "540px",
+    // maxHeight: "540px",
+    // maxWidth: "100%",
     width: "100%",
-    objectFit: "cover",
+    objectFit: "contain",
   },
   title: {
     marginBottom: rem(16),
@@ -145,7 +146,7 @@ function SpotDetails() {
         `${import.meta.env.VITE_BASE_API_URL}/api/spots/${spotId}`
       );
       if (response.status === 200) {
-        navigate("/");
+        navigate(`/spots/${spot.city.toLowerCase()}`);
       }
     } catch (error) {
       console.log(error);
@@ -183,7 +184,12 @@ function SpotDetails() {
           <Text size="sm" color="gray" style={{ marginBottom: rem(8) }}>
             City: {spot.city}
           </Text>
-          <Text size="sm" color="gray" style={{ marginBottom: rem(16) }}>
+          <Text
+            size="sm"
+            color="gray"
+            className={classes.description}
+            style={{ marginBottom: rem(16) }}
+          >
             Address: {spot.address}
           </Text>
           <Text size="sm" color="gray" className={classes.createdBy}>

@@ -142,7 +142,7 @@ const UpdatePage = () => {
       if (response.status === 200) {
         console.log("All good");
         // Navigate to the details page
-        navigate(`/spots`);
+        navigate(`/spots/${inputs.city.toLowerCase()}`);
       }
     } catch (error) {
       console.log(error);
