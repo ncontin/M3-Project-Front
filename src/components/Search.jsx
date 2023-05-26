@@ -44,7 +44,7 @@ function Search({ searchText, setSearchText }) {
       rightSectionWidth={42}
       mb={20}
       mt={20}
-      w={400}
+      w={350}
     />
   );
 }

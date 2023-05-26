@@ -20,7 +20,7 @@ import { Link } from "react-router-dom";
 const useStyles = createStyles((theme) => ({
   title: {
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-    fontSize: rem(42),
+    fontSize: rem(46),
     fontWeight: 800,
     lineHeight: 1.1,
     margin: 0,
@@ -39,7 +39,21 @@ const Spots = () => {
   const { classes, theme } = useStyles();
   return (
     <Container mt={30} mb={30} size={1920}>
-      <Text mt={50} ml={0} className={classes.title}>
+      {/* <Text mt={50} ml={0} className={classes.title}>
+        Find Spots In Your City
+      </Text> */}
+      <Text
+        ta="center"
+        className={classes.title}
+        component="span"
+        variant="gradient"
+        gradient={{
+          from: "blue",
+          to: "cyan",
+        }}
+        inherit
+        mt={50}
+      >
         Find Spots In Your City
       </Text>
       <Flex
@@ -49,7 +63,7 @@ const Spots = () => {
         align="center"
         direction="row"
         wrap="wrap"
-        mt={50}
+        mt={40}
       >
         <London />
         <Rome />

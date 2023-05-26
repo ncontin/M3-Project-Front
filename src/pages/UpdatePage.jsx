@@ -171,7 +171,7 @@ const UpdatePage = () => {
             gradient={{ from: "blue", to: "cyan" }}
             inherit
           >
-            Create a Spot
+            Update Spot
           </Text>
           <TextInput
             label="Spot Title"

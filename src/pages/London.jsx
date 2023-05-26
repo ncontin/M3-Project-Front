@@ -148,8 +148,8 @@ export function London() {
                           </Text>
                           <Badge size="sm">{spot.city}</Badge>
                         </Group>
-                        <Text fz="sm" mt="xs" mb={40}>
-                          {spot.description}
+                        <Text fz="sm" mt="xs" h={65}>
+                          {spot.description.slice(0, 130) + "..."}
                         </Text>
                       </Card.Section>
 
